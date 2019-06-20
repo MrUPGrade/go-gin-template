@@ -21,6 +21,7 @@ func registerRoutes(db *gorm.DB, engine *gin.Engine) {
 
 	todoResource := resources.TodoController{ResourceBase: rb}
 	engine.GET("/todo", todoResource.Get)
+	engine.POST("/todo", todoResource.Post)
 }
 
 func main() {

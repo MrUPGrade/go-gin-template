@@ -1,8 +1,9 @@
 package resources
 
 import (
-	"ginapi/pkg/db/models"
+	models "ginapi/pkg/db/models"
 	"github.com/gin-gonic/gin"
+	"net/http"
 )
 
 type TodoController struct {
@@ -10,8 +11,20 @@ type TodoController struct {
 }
 
 func (r *TodoController) Get(c *gin.Context) {
-	todos := make([]pkg.Todo, 0)
+	todos := make([]models.Todo, 0)
 	r.DB.Limit(10).Order("id").Find(&todos)
 
-	c.JSON(200, todos)
+	c.JSON(http.StatusOK, todos)
+}
+
+func (r *TodoController) Post(c *gin.Context) {
+	todo := new(models.Todo)
+	if err := c.ShouldBindJSON(todo); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	r.DB.Create(todo)
+
+	c.JSON(http.StatusOK, gin.H{"message": "object created"})
 }

@@ -14,7 +14,7 @@ DC=$(DEV_ENV) docker-compose -p $(BINNAME)
 
 build-app:
 	@-echo "### building $(BINNAME) [$(DATE)"
-	$(GO) build -o $(BINNAME) cmd/api/
+	$(GO) build -o $(BINNAME) cmd/api/main.go
 
 build-docker:
 	@-echo "### building $(BINNAME) docker [$(DATE)]"
@@ -35,7 +35,7 @@ app-docker-up:
 app-docker-down:
 	-$(DOCKER) rm -f $(BINNAME)
 
-app-docker-setup: app-docker-down app-docker-up
+app-docker-setup: app-docker-down build app-docker-up
 
 
 

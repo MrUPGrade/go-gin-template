@@ -9,8 +9,3 @@ services:
 
     ports:
     - ${GT_DB_PORT}:5432
-
-  prom-push-gw:
-    image: prom/pushgateway
-    ports:
-    - ${GT_PROM_PGW_PORT}:9091

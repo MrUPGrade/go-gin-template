@@ -1,0 +1,16 @@
+version: '3'
+services:
+  db:
+    image: postgres:11
+    environment:
+      POSTGRES_DB: ${GT_DB_NAME}
+      POSTGRES_USER: ${GT_DB_USER}
+      POSTGRES_PASSWORD: ${GT_DB_PASS}
+
+    ports:
+    - ${GT_DB_PORT}:5432
+
+  prom-push-gw:
+    image: prom/pushgateway
+    ports:
+    - ${GT_PROM_PGW_PORT}:9091

@@ -20,7 +20,7 @@ func (r *TodoController) Get(c *gin.Context) {
 func (r *TodoController) Post(c *gin.Context) {
 	todo := new(models.Todo)
 	if err := c.ShouldBindJSON(todo); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		c.JSON(http.StatusBadRequest, err.Error())
 		return
 	}
 

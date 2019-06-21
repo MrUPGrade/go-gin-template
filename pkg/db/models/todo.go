@@ -6,7 +6,7 @@ import (
 
 type Todo struct {
 	gorm.Model
-	Title       string
+	Title       string `binding:"required"`
 	Description string
 	Done        bool
 }
